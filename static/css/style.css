@@ -1,66 +1,483 @@
-img.logo-sm {
-    height: 1.5em;
+/* ============================================================
+   FONTS
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+    /* Brand palette */
+    --clr-primary:       #2563a8;
+    --clr-primary-light: #3b82c4;
+    --clr-primary-dark:  #1a4f8a;
+    --clr-accent:        #22c55e;   /* WhatsApp / CTA green */
+    --clr-accent-dark:   #16a34a;
+
+    /* Neutrals */
+    --clr-surface:       #ffffff;
+    --clr-bg:            #f4f7fb;
+    --clr-dark:          #111827;
+    --clr-muted:         #6b7280;
+    --clr-border:        #e5eaf2;
+
+    /* Typography */
+    --ff-body: 'Inter', system-ui, sans-serif;
+    --fw-normal: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+
+    /* Spacing */
+    --section-py: 5rem;
+
+    /* Radius */
+    --radius-sm:  6px;
+    --radius-md:  12px;
+    --radius-lg:  20px;
+    --radius-xl:  32px;
+
+    /* Shadows */
+    --shadow-card:  0 2px 12px rgba(37, 99, 168, 0.08);
+    --shadow-hover: 0 8px 32px rgba(37, 99, 168, 0.16);
+    --shadow-nav:   0 1px 16px rgba(0, 0, 0, 0.07);
+
+    /* Bootstrap overrides */
+    --bs-primary:        #2563a8;
+    --bs-primary-rgb:    37, 99, 168;
+    --bs-success:        #22c55e;
+    --bs-success-rgb:    34, 197, 94;
+    --bs-info:           #22c55e;
+    --bs-info-rgb:       34, 197, 94;
+    --bs-dark:           #111827;
+    --bs-dark-rgb:       17, 24, 39;
+    --bs-light:          #f4f7fb;
+    --bs-light-rgb:      244, 247, 251;
+    --bs-body-font-family: var(--ff-body);
 }
 
-img.logo-md {
-    height: 5em;
+/* ============================================================
+   BASE
+   ============================================================ */
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--ff-body);
+    color: var(--clr-dark);
+    background: var(--clr-surface);
+    -webkit-font-smoothing: antialiased;
 }
 
-a, a:hover {
-    color: inherit;
+a { color: var(--clr-primary); }
+a:hover { color: var(--clr-primary-dark); }
+
+/* ============================================================
+   BOOTSTRAP COMPONENT OVERRIDES
+   ============================================================ */
+.btn {
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.01em;
+    transition: all 0.2s ease;
+}
+.btn-primary {
+    background-color: var(--clr-primary);
+    border-color: var(--clr-primary);
+    color: #fff;
+}
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--clr-primary-dark);
+    border-color: var(--clr-primary-dark);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(37, 99, 168, 0.35);
+}
+.btn-outline-primary {
+    color: var(--clr-primary);
+    border-color: var(--clr-primary);
+}
+.btn-outline-primary:hover {
+    background-color: var(--clr-primary);
+    border-color: var(--clr-primary);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(37, 99, 168, 0.3);
+}
+/* WhatsApp / accent button */
+.btn-info {
+    background-color: var(--clr-accent);
+    border-color: var(--clr-accent);
+    color: #fff;
+}
+.btn-info:hover, .btn-info:focus {
+    background-color: var(--clr-accent-dark);
+    border-color: var(--clr-accent-dark);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+}
+.btn-light {
+    background-color: rgba(255,255,255,0.95);
+    border-color: transparent;
+    color: var(--clr-primary);
+}
+.btn-light:hover {
+    background-color: #fff;
+    color: var(--clr-primary-dark);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
 }
 
+.text-primary   { color: var(--clr-primary)   !important; }
+.text-success   { color: var(--clr-accent)     !important; }
+.text-muted     { color: var(--clr-muted)      !important; }
+
+.bg-primary     { background-color: var(--clr-primary) !important; }
+.bg-light       { background-color: var(--clr-bg)      !important; }
+.bg-dark        { background-color: var(--clr-dark)    !important; }
+
+/* ============================================================
+   LOGO SIZES
+   ============================================================ */
+.logo-sm   { height: 2rem;  }
+.logo-md   { height: 3.5rem; }
+.logo-hero { height: 5.5rem; }
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
 .navbar {
-    padding: inherit;
+    backdrop-filter: blur(8px);
+    background-color: rgba(255,255,255,0.96) !important;
+    box-shadow: var(--shadow-nav);
+    transition: box-shadow 0.3s;
+}
+.navbar .nav-link {
+    font-weight: var(--fw-medium);
+    font-size: 0.9rem;
+    color: #374151;
+    position: relative;
+    padding-bottom: 0.35rem !important;
+}
+.navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; right: 50%;
+    height: 2px;
+    background: var(--clr-primary);
+    border-radius: 2px;
+    transition: left 0.2s, right 0.2s;
+}
+.navbar .nav-link:hover::after,
+.navbar .nav-link:focus::after {
+    left: 0.75rem;
+    right: 0.75rem;
+}
+.navbar .nav-link:hover { color: var(--clr-primary); }
+
+/* ============================================================
+   SECTION HEADING ACCENT
+   ============================================================ */
+.section-title {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 3rem; height: 3px;
+    background: var(--clr-primary);
+    border-radius: 3px;
 }
 
-.jumbotron {
-    background-color: inherit;
-    margin-bottom:0;
-}
-
-.display-5 {
-    font-size: 2.5em;
-    font-weight: 300;
-}
-
-.bold {
-    font-weight: 600;
-}
-
-#intro {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero-section {
     background-image: url('/static/images/p.jpg');
-    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
-
-@media only screen and (max-device-width: 1024px) {
-    #intro {
-        background-attachment: scroll;
-    }
+.hero-overlay {
+    inset: 0;
+    background: linear-gradient(
+        150deg,
+        rgba(17, 40, 80, 0.88) 0%,
+        rgba(37, 99, 168, 0.78) 60%,
+        rgba(17, 40, 80, 0.70) 100%
+    );
 }
-
-.bg-black {
-    background-color: #050500;
+.hero-section h1 {
+    text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+    line-height: 1.15;
 }
-
-.btn-block {
-    display: -webkit-flex;
-    -webkit-align-items: center;
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    backdrop-filter: blur(4px);
+    border-radius: var(--radius-xl);
+    padding: 0.4rem 1.1rem;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 1.75rem;
+}
+.hero-stats {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.75);
+    margin-top: 0.25rem;
+}
+.hero-stats span {
+    display: flex;
     align-items: center;
+    gap: 0.35rem;
+}
+.hero-stats span::before {
+    content: '✓';
+    color: var(--clr-accent);
+    font-weight: var(--fw-bold);
 }
 
-.btn {
-    max-width: 200px;
-    border-radius: 50px;
+/* ============================================================
+   CARDS — base
+   ============================================================ */
+.card {
+    border: 1px solid var(--clr-border) !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border-radius: var(--radius-md) !important;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
 }
 
-.c-btn-wide {
-    width: 100%;
-    margin:  0.25rem;
+/* About cards — top accent bar */
+.card-about {
+    border-top: 3px solid var(--clr-primary) !important;
+}
+
+/* Service cards — left accent bar */
+.card-service {
+    border-left: 4px solid var(--clr-primary) !important;
+}
+.card-service .service-tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: var(--fw-semibold);
+    color: var(--clr-primary);
+    background: rgba(37, 99, 168, 0.08);
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+/* Service list items */
+.service-list li {
+    padding: 0.3rem 0;
+    padding-left: 1.1rem;
+    position: relative;
+    font-size: 0.93rem;
+    color: #374151;
+    border-bottom: 1px solid var(--clr-border);
+}
+.service-list li:last-child { border-bottom: none; }
+.service-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--clr-primary);
+    font-weight: var(--fw-bold);
+    font-size: 0.8rem;
+    top: 0.38rem;
+}
+
+/* About icon circles */
+.about-icon {
+    width: 3rem; height: 3rem;
+    background: rgba(37, 99, 168, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.25rem;
+    color: var(--clr-primary);
+    transition: background 0.2s;
+}
+.card:hover .about-icon {
+    background: rgba(37, 99, 168, 0.15);
+}
+
+/* How-we-work step cards */
+.card-step {
+    border-top: 3px solid var(--clr-primary) !important;
+    text-align: center;
+}
+.step-number {
+    width: 3.25rem; height: 3.25rem;
+    background: var(--clr-primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    margin: 0 auto 1rem;
+    box-shadow: 0 4px 12px rgba(37,99,168,0.25);
+}
+
+/* ============================================================
+   STATS SECTION
+   ============================================================ */
+.stats-section {
+    background: linear-gradient(135deg, var(--clr-primary-dark) 0%, var(--clr-primary) 100%);
+    position: relative;
+    overflow: hidden;
+}
+.stats-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.stat-item {
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.12);
+    transition: background 0.2s;
+}
+.stat-item:hover { background: rgba(255,255,255,0.12); }
+.stat-number {
+    font-size: 3rem;
+    font-weight: var(--fw-extrabold);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+.stat-label {
+    font-size: 0.88rem;
+    opacity: 0.8;
+    margin-top: 0.4rem;
+    font-weight: var(--fw-medium);
+}
+
+/* ============================================================
+   CONTACTS
+   ============================================================ */
+.contact-info-item {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--clr-border);
+}
+.contact-info-item:last-of-type { border-bottom: none; }
+.contact-info-item h6 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--clr-primary);
+    margin-bottom: 0.3rem;
+}
+
+/* ============================================================
+   MAP
+   ============================================================ */
+.map-container { height: 420px; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+    background: #0d1520 !important;
+}
+footer .footer-heading {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 1rem;
+}
+footer ul li { font-size: 0.9rem; }
+footer a { transition: color 0.15s; }
+footer a:hover { color: #fff !important; }
+.footer-divider {
+    border-color: rgba(255,255,255,0.08) !important;
+}
+
+/* ============================================================
+   ACTIVE NAV LINK
+   ============================================================ */
+.navbar .nav-link.active {
+    color: var(--clr-primary) !important;
+}
+.navbar .nav-link.active::after {
+    left: 0.75rem;
+    right: 0.75rem;
+}
+
+/* ============================================================
+   SECTION WAVE DIVIDERS
+   ============================================================ */
+.wave-bottom {
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    line-height: 0;
+    pointer-events: none;
+}
+.wave-bottom svg { display: block; width: 100%; }
+
+/* Floating WhatsApp button */
+.whatsapp-fab {
+    position: fixed;
+    bottom: 1.75rem;
+    right: 1.75rem;
+    z-index: 1050;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    background: #25d366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+}
+.whatsapp-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.55);
+}
+.whatsapp-fab svg { width: 1.7rem; height: 1.7rem; fill: #fff; }
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.text-gradient {
+    background: linear-gradient(135deg, var(--clr-primary-light), var(--clr-primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 991px) {
+    .hero-section { background-attachment: scroll; }
+    :root { --section-py: 3.5rem; }
+}
+@media (max-width: 576px) {
+    .logo-hero       { height: 4rem; }
+    .map-container   { height: 280px; }
+    .stat-number     { font-size: 2.25rem; }
+    .hero-stats      { gap: 0.4rem 1rem; font-size: 0.82rem; }
 }
