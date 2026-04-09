@@ -480,4 +480,5 @@ footer a:hover { color: #fff !important; }
     .map-container   { height: 280px; }
     .stat-number     { font-size: 2.25rem; }
     .hero-stats      { gap: 0.4rem 1rem; font-size: 0.82rem; }
+    footer           { padding-bottom: 5rem !important; }
 }
